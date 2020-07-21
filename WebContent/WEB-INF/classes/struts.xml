@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+	<constant name="struts.devMode" value="true" />
+	<constant name="struts.ui.theme" value="simple" />
+	<constant name="struts.serve.static" value="false" />
+	<package name="default" extends="struts-default">
+		<result-types>
+			<result-type name="json"
+				class="org.apache.struts2.json.JSONResult" />
+		</result-types>
+		<interceptors>
+			<interceptor name="json"
+				class="org.apache.struts2.json.JSONInterceptor" />
+			<interceptor name="logging"
+				class="mrmathami.tms.interceptors.LoggingInterceptor" />
+			<interceptor-stack name="jsonStack">
+				<interceptor-ref name="json" />
+				<interceptor-ref name="logging" />
+				<interceptor-ref name="defaultStack" />
+			</interceptor-stack>
+		</interceptors>
+		<default-interceptor-ref name="jsonStack" />
+	</package>
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<package name="contracts" namespace="/contracts"
+		extends="default">
+		<action name="list" method="doList"
+			class="mrmathami.tms.actions.ContractAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success, contracts.*</param>
+			</result>
+		</action>
+
+		<action name="get" method="doGet"
+			class="mrmathami.tms.actions.ContractAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success, contract.*</param>
+			</result>
+		</action>
+	</package>
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<package name="stations" namespace="/stations"
+		extends="default">
+		<action name="list" method="doList"
+			class="mrmathami.tms.actions.StationAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success, stations.*</param>
+			</result>
+		</action>
+
+		<action name="get" method="doGet"
+			class="mrmathami.tms.actions.StationAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success, station.*</param>
+			</result>
+		</action>
+	</package>
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<package name="employees" namespace="/employees"
+		extends="default">
+		<action name="list" method="doList"
+			class="mrmathami.tms.actions.EmployeeAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success, employees.*</param>
+			</result>
+		</action>
+
+		<action name="get" method="doGet"
+			class="mrmathami.tms.actions.EmployeeAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success, employee.*</param>
+			</result>
+		</action>
+
+		<action name="add" method="doAdd"
+			class="mrmathami.tms.actions.EmployeeAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success, employee.*</param>
+			</result>
+		</action>
+
+		<action name="edit" method="doEdit"
+			class="mrmathami.tms.actions.EmployeeAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success</param>
+			</result>
+		</action>
+
+		<action name="delete" method="doDelete"
+			class="mrmathami.tms.actions.EmployeeAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success</param>
+			</result>
+		</action>
+	</package>
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<package name="vehicles" namespace="/vehicles"
+		extends="default">
+		<action name="list" method="doList"
+			class="mrmathami.tms.actions.VehicleAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success, vehicles.*</param>
+			</result>
+		</action>
+
+		<action name="get" method="doGet"
+			class="mrmathami.tms.actions.VehicleAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success, vehicle.*</param>
+			</result>
+		</action>
+
+		<action name="add" method="doAdd"
+			class="mrmathami.tms.actions.VehicleAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success, vehicle.*</param>
+			</result>
+		</action>
+
+		<action name="edit" method="doEdit"
+			class="mrmathami.tms.actions.VehicleAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success</param>
+			</result>
+		</action>
+
+		<action name="delete" method="doDelete"
+			class="mrmathami.tms.actions.VehicleAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success</param>
+			</result>
+		</action>
+	</package>
+	<!-- +++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++ -->
+	<package name="locations" namespace="/locations"
+			 extends="default">
+		<action name="list" method="doList"
+				class="mrmathami.tms.actions.LocationAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success, locations.*</param>
+			</result>
+		</action>
+
+		<action name="listByLastTimestamp" method="doListByLastTimestamp"
+				class="mrmathami.tms.actions.LocationAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success, locations.*</param>
+			</result>
+		</action>
+
+		<action name="get" method="doGet"
+				class="mrmathami.tms.actions.LocationAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success, location.*</param>
+			</result>
+		</action>
+
+		<action name="add" method="doAdd"
+				class="mrmathami.tms.actions.LocationAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success, location.*</param>
+			</result>
+		</action>
+
+		<action name="edit" method="doEdit"
+				class="mrmathami.tms.actions.LocationAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success</param>
+			</result>
+		</action>
+
+		<action name="delete" method="doDelete"
+				class="mrmathami.tms.actions.LocationAction">
+			<result type="json">
+				<param name="noCache">true</param>
+				<param name="excludeNullProperties">false</param>
+				<param name="includeProperties">success</param>
+			</result>
+		</action>
+	</package>
+</struts>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Configuration status="debug">
+	<Appenders>
+		<Console name="Console" target="SYSTEM_OUT">
+			<PatternLayout
+				pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />
+		</Console>
+	</Appenders>
+<!--	<Appenders>-->
+<!--		<RollingFile name="File" fileName="A://_current.log"-->
+<!--			filePattern="./$${date:yyyy-MM}/app-%d{MM-dd-yyyy}-%i.log.gz">-->
+<!--			<PatternLayout-->
+<!--				pattern="%d{HH:mm:ss.SSS} [%t] %-5level %logger{36} - %msg%n" />-->
+<!--			<Policies>-->
+<!--				<TimeBasedTriggeringPolicy />-->
+<!--				<SizeBasedTriggeringPolicy size="10 MB" />-->
+<!--			</Policies>-->
+<!--		</RollingFile>-->
+<!--	</Appenders>-->
+	<Loggers>
+		<Logger name="com.opensymphony.xwork2" level="warn" />
+		<Logger name="org.apache.struts2" level="warn" />
+		<Logger name="org.apache.ibatis" level="info" />
+		<Logger name="org.mybatis" level="debug" />
+		<Logger name="mrmathami.tms" level="debug" />
+		<Root level="trace">
+			<AppenderRef ref="Console" />
+			<AppenderRef ref="File" />
+		</Root>
+	</Loggers>
+</Configuration>

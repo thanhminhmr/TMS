@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mrmathami.tms.model.mapper.Employees">
+    <select id="get" parameterType="mrmathami.tms.model.bean.Employee"
+            resultType="mrmathami.tms.model.bean.Employee">
+        SELECT empId, empName, empPosition, empAddress, empPhone, empExpYear, staId, conId FROM employees WHERE empId =
+        #{empId}
+    </select>
+
+    <select id="list" resultMap="employee">
+        SELECT empId, empName, empPosition, empAddress, empPhone, empExpYear, staId, conId FROM employees
+    </select>
+
+    <insert id="add" parameterType="mrmathami.tms.model.bean.Employee" keyProperty="empId" keyColumn="empId"
+            useGeneratedKeys="true">
+        INSERT INTO employees (empName, empPosition, empAddress, empPhone, empExpYear, staId, conId) VALUES
+        (#{empName}, #{empPosition}, #{empAddress}, #{empPhone}, #{empExpYear}, #{staId}, #{conId})
+    </insert>
+
+    <update id="edit" parameterType="mrmathami.tms.model.bean.Employee">
+        UPDATE employees SET empName = #{empName}, empPosition = #{empPosition}, empAddress = #{empAddress}, empPhone =
+        #{empPhone}, empExpYear = #{empExpYear}, staId = #{staId}, conId = #{conId} WHERE empId = #{empId}
+    </update>
+
+    <delete id="delete" parameterType="mrmathami.tms.model.bean.Employee">
+        DELETE FROM employees WHERE empId = #{empId}
+    </delete>
+
+    <delete id="deleteList">
+        DELETE FROM employees WHERE empId IN
+        <foreach collection="list" item="employee" index="index" open="(" separator="," close=")">
+            #{employee.empId}
+        </foreach>
+    </delete>
+
+    <resultMap id="employee" type="mrmathami.tms.model.bean.Employee">
+        <result property="empId" column="empId"/>
+        <result property="empName" column="empName"/>
+        <result property="empPosition" column="empPosition"/>
+        <result property="empAddress" column="empAddress"/>
+        <result property="empPhone" column="empPhone"/>
+        <result property="empExpYear" column="empExpYear"/>
+        <result property="staId" column="staId"/>
+        <result property="conId" column="conId"/>
+    </resultMap>
+</mapper>
+

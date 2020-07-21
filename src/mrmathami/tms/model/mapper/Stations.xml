@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mrmathami.tms.model.mapper.Stations">
+    <select id="get" parameterType="mrmathami.tms.model.bean.Station"
+            resultType="mrmathami.tms.model.bean.Station">
+        SELECT staId, staName, staAddress FROM stations WHERE staId = #{staId}
+    </select>
+
+    <select id="list" resultMap="station">
+        SELECT staId, staName, staAddress FROM stations
+    </select>
+
+    <resultMap id="station" type="mrmathami.tms.model.bean.Station">
+        <result property="staId" column="staId"/>
+        <result property="staName" column="staName"/>
+        <result property="staAddress" column="staAddress"/>
+    </resultMap>
+</mapper>
+

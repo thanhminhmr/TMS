@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mrmathami.tms.model.mapper.Contracts">
+    <select id="get" parameterType="mrmathami.tms.model.bean.Contract"
+            resultType="mrmathami.tms.model.bean.Contract">
+        SELECT conId, conName, conStartDate, conExpiryDate FROM contracts WHERE conId = #{conId}
+    </select>
+
+    <select id="list" resultMap="contract">
+        SELECT conId, conName, conStartDate, conExpiryDate FROM contracts
+    </select>
+
+    <resultMap id="contract" type="mrmathami.tms.model.bean.Contract">
+        <result property="conId" column="conId"/>
+        <result property="conName" column="conName"/>
+        <result property="conStartDate" column="conStartDate"/>
+        <result property="conExpiryDate" column="conExpiryDate"/>
+    </resultMap>
+</mapper>
+

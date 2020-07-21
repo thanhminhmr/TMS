@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mrmathami.tms.model.mapper.Vehicles">
+    <select id="get" parameterType="mrmathami.tms.model.bean.Vehicle"
+            resultType="mrmathami.tms.model.bean.Vehicle">
+        SELECT vehId, vehPlateNumber, vehManufacturer, vehColor, empId FROM vehicles WHERE vehId = #{vehId}
+    </select>
+
+    <select id="list" resultMap="vehicle">
+        SELECT vehId, vehPlateNumber, vehManufacturer, vehColor, empId FROM vehicles
+    </select>
+
+    <insert id="add" parameterType="mrmathami.tms.model.bean.Vehicle" keyProperty="vehId" keyColumn="vehId"
+            useGeneratedKeys="true">
+        INSERT INTO vehicles (vehPlateNumber, vehManufacturer, vehColor, empId) VALUES (#{vehPlateNumber},
+        #{vehManufacturer}, #{vehColor}, #{empId})
+    </insert>
+
+    <update id="edit" parameterType="mrmathami.tms.model.bean.Vehicle">
+        UPDATE vehicles SET vehPlateNumber = #{vehPlateNumber}, vehManufacturer = #{vehManufacturer}, vehColor =
+        #{vehColor}, empId = #{empId} WHERE vehId = #{vehId}
+    </update>
+
+    <delete id="delete" parameterType="mrmathami.tms.model.bean.Vehicle">
+        DELETE FROM vehicles WHERE vehId = #{vehId}
+    </delete>
+
+    <delete id="deleteList">
+        DELETE FROM vehicles WHERE vehId IN
+        <foreach collection="list" item="vehicle" index="index" open="(" separator="," close=")">
+            #{vehicle.vehId}
+        </foreach>
+    </delete>
+
+    <resultMap id="vehicle" type="mrmathami.tms.model.bean.Vehicle">
+        <result property="vehId" column="vehId"/>
+        <result property="vehPlateNumber" column="vehPlateNumber"/>
+        <result property="vehManufacturer" column="vehManufacturer"/>
+        <result property="vehColor" column="vehColor"/>
+        <result property="empId" column="empId"/>
+    </resultMap>
+</mapper>
+

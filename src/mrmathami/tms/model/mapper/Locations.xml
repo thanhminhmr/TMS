@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="mrmathami.tms.model.mapper.Locations">
+    <select id="get" parameterType="mrmathami.tms.model.bean.Location"
+            resultType="mrmathami.tms.model.bean.Location">
+        SELECT locId, vehId, locLatitude, locLongitude, locTimestamp FROM locations WHERE locId = #{locId}
+    </select>
+
+    <select id="list" resultMap="location">
+        SELECT locId, vehId, locLatitude, locLongitude, locTimestamp FROM locations
+    </select>
+
+    <select id="listByLastTimestamp" resultMap="location">
+        SELECT locId, vehId, locLatitude, locLongitude, locTimestamp FROM locations WHERE (vehId, locTimestamp) IN
+        (SELECT vehId, MAX(locTimestamp) FROM locations GROUP BY vehId);
+    </select>
+
+    <insert id="add" parameterType="mrmathami.tms.model.bean.Location" keyProperty="locId" keyColumn="locId"
+            useGeneratedKeys="true">
+        INSERT INTO locations (vehId, locLatitude, locLongitude) VALUES (#{vehId}, #{locLatitude}, #{locLongitude})
+    </insert>
+
+    <update id="edit" parameterType="mrmathami.tms.model.bean.Location">
+        UPDATE locations SET vehId = #{vehId}, locLatitude = #{locLatitude}, locLongitude = #{locLongitude} WHERE locId
+        = #{locId}
+    </update>
+
+    <delete id="delete" parameterType="mrmathami.tms.model.bean.Location">
+        DELETE FROM locations WHERE locId = #{locId}
+    </delete>
+
+    <delete id="deleteList">
+        DELETE FROM locations WHERE locId IN
+        <foreach collection="list" item="location" index="index" open="(" separator="," close=")">
+            #{location.locId}
+        </foreach>
+    </delete>
+
+    <resultMap id="location" type="mrmathami.tms.model.bean.Location">
+        <result property="locId" column="locId"/>
+        <result property="locLatitude" column="locLatitude"/>
+        <result property="locLongitude" column="locLongitude"/>
+        <result property="locTimestamp" column="locTimestamp"/>
+        <result property="vehId" column="vehId"/>
+    </resultMap>
+</mapper>
+
